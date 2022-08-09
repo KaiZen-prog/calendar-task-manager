@@ -1,7 +1,3 @@
 export const ActionType = {
-
-};
-
-export const ActionCreator = {
-
+  CHANGE_MONTH: 'CHANGE_MONTH'
 };
