@@ -1,12 +1,14 @@
 import React from 'react';
 import {HashRouter } from 'react-router-dom';
-import Header from '../header/header';
+import Calendar from '../calendar';
+import GlobalStyle from '../../theme/globalStyle';
 
 const App = () => {
   return (
   <HashRouter>
+    <GlobalStyle/>
     <div className="app">
-      <Header/>
+      <Calendar/>
       <main className="app__main">
       </main>
     </div>
