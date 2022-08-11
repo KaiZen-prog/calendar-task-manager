@@ -1,11 +1,17 @@
 import {css} from 'styled-components';
+import theme from '../theme/theme';
 
 export const font = (size, height, weight) => css`
 font-style: normal;
 	font-size: ${size}px;
-	line-height: ${height}%;
+	line-height: ${height}px;
 	font-weight: ${weight};
 `;
+
+export const transitionColor = (value=theme.animation.trans300) => css`
+  transition: color ${value};
+  transition: background ${value};
+;`
 
 export const button = (color, background, backgroundHovered) => css`
   display: inline-block;

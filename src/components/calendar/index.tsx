@@ -2,7 +2,7 @@ import React from 'react';
 import {useAppSelector, useAppDispatch} from '../../hooks/hooks';
 import {getStringWithCapitalLetter} from "../../common/utils";
 import moment from 'moment';
-import Block from './calendar.styled';
+import Block from "./calendar.styled";
 import Day from '../day';
 
 const Calendar = () => {
@@ -58,9 +58,9 @@ const Calendar = () => {
           </svg>
           <span className="visually-hidden">Вперед</span>
         </Block.ChangeMonthButton>
-        <button type='button' onClick={() => dispatch({type: 'CHANGE_MONTH', payload: moment()})}>
+        <Block.ResetMonthButton type='button' onClick={() => dispatch({type: 'CHANGE_MONTH', payload: moment()})}>
           Сегодня
-        </button>
+        </Block.ResetMonthButton>
       </Block.ButtonsWrapper>
       <Block.CalendarWrapper>
         <>

@@ -1,8 +1,12 @@
-import styled from 'styled-components';
+import styled, { StyledComponentBase } from "styled-components";
 import theme from '../../theme/theme';
 import {font} from '../../theme/mixins';
 
-const Day = styled.div`
+interface IDay extends StyledComponentBase<any, object> {
+  DateSpan?: any;
+}
+
+const Day: IDay = styled.div`
   width: 143px;
   height: 120px;
   
