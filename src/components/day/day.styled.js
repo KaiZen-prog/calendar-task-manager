@@ -6,6 +6,8 @@ const Day = styled.div`
   width: 143px;
   height: 120px;
   
+  padding: 5px 8px;
+  
   :nth-child(7n+1) {
     border-left: 1px solid ${theme.color.nero};
   }
@@ -24,9 +26,9 @@ const Day = styled.div`
   border-bottom: 1px solid ${theme.color.nero};
 `;
 
-Day.Month = styled.span`
-  color: ${theme.color.nero};
-  ${font(theme.fonts.s18l21n.size, theme.fonts.s18l21n.lineHeight, theme.fonts.s18l21n.weight)}
+Day.DateSpan = styled.span`
+  ${font(theme.fonts.s14l16n.size, theme.fonts.s14l16n.lineHeight, theme.fonts.s14l16n.weight)};
+  color: ${theme.color.dimGray};
 `;
 
 export default Day;

@@ -1,21 +1,15 @@
 import moment from 'moment';
 import 'moment/locale/ru';
 import {ActionType} from '../actions/actions';
-import {extend} from '../../utils/common';
-
-interface ChangeMonthAction {
-  type: string;
-  payload: moment.Moment;
-}
 
 const initialState = {
   currentDate: moment()
 };
 
-const reducer = (state = initialState, action: ChangeMonthAction) => {
+const reducer = (state = initialState, action: {type: string; payload: moment.Moment;}) => {
   switch (action.type) {
     case ActionType.CHANGE_MONTH:
-      return extend(state, {
+      return Object.assign({}, state, {
         currentDate: action.payload
       });
   }

@@ -1,17 +1,24 @@
 import React from 'react';
 import Block from './day.styled';
 import moment from 'moment';
+import {getStringWithCapitalLetter} from "../../common/utils";
 
 interface DayProps {
   date: moment.Moment;
+  dayNumber: number;
 }
 
-const Day = ({date}: DayProps) => {
+const Day = (props: DayProps) => {
+  const {date, dayNumber} = props;
+
   return (
     <Block>
-      <div>
-        {moment(date).format('dddd D')}
-      </div>
+      <Block.DateSpan>
+        {dayNumber < 7
+          ? getStringWithCapitalLetter(moment(date).format('dddd')) + ', ' + moment(date).format('D')
+          : moment(date).format('D')
+        }
+      </Block.DateSpan>
     </Block>
   );
 };
