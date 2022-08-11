@@ -1,4 +1,3 @@
-import React from 'react';
 import {useAppSelector, useAppDispatch} from '../../hooks/hooks';
 import {getStringWithCapitalLetter} from "../../common/utils";
 import moment from 'moment';
@@ -6,8 +5,8 @@ import Block from "./calendar.styled";
 import Day from '../day';
 
 const Calendar = () => {
-  //Присоединяем Redux
   const currentDate = useAppSelector(store => store.currentDate);
+  const tasks = useAppSelector(store => store.tasks);
   const dispatch = useAppDispatch();
 
   //Получаем moment'ы предыдущего и следующего месяцев
@@ -19,7 +18,7 @@ const Calendar = () => {
     return Array.from({length: moment(date).daysInMonth()}, (x, i) => moment(date).startOf('month').add(i, 'days'));
   };
 
-  let currentMonthDays = getDaysArray(currentDate);
+  let currentMonthDays: any[] = getDaysArray(currentDate);
 
   //Если текущий месяц не начинается с понедельника,
   //то собирем массив дней из последней недели предыдущего месяца, начиная с понедельника
@@ -41,6 +40,9 @@ const Calendar = () => {
   if (prevMonthDays.length > 0) {
     currentMonthDays = prevMonthDays.concat(currentMonthDays);
   }
+
+  //Фильтруем задачи, оставляя только те, которые подлежат выводу на текущую страницу календаря
+  const currentTasks = tasks.filter(task => moment(task.date).isBetween(moment(currentMonthDays[0]),moment(currentMonthDays[currentMonthDays.length-1]), 'days', '[]'));
 
   return (
     <Block>
@@ -64,8 +66,16 @@ const Calendar = () => {
       </Block.ButtonsWrapper>
       <Block.CalendarWrapper>
         <>
-          {currentMonthDays.map((day,i) =>
-            <Day key={i} date={day} dayNumber={i}/>
+          {currentMonthDays.map((day,i) => {
+            let task ={};
+            for (let j = 0; j < currentTasks.length; j++) {
+              if (moment(currentTasks[j].date).format('MMMM dddd D') === moment(day).format('MMMM dddd D')) {
+                task = currentTasks[j];
+                break;
+              }
+            }
+            return <Day key={i} date={day} dayNumber={i} task={task}/>
+            }
           )}
         </>
       </Block.CalendarWrapper>

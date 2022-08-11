@@ -1,9 +1,11 @@
 import moment from 'moment';
 import 'moment/locale/ru';
 import {ActionType} from '../actions/actions';
+import {tasks} from '../../mocks/mocks';
 
 const initialState = {
-  currentDate: moment()
+  currentDate: moment(),
+  tasks: tasks,
 };
 
 const reducer = (state = initialState, action: {type: string; payload: moment.Moment;}) => {

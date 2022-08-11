@@ -2,14 +2,16 @@ import React from 'react';
 import Block from './day.styled';
 import moment from 'moment';
 import {getStringWithCapitalLetter} from "../../common/utils";
+import {ITask} from '../../common/interfaces';
 
 interface DayProps {
   date: moment.Moment;
   dayNumber: number;
+  task?: ITask;
 }
 
 const Day = (props: DayProps) => {
-  const {date, dayNumber} = props;
+  const {date, dayNumber, task} = props;
 
   return (
     <Block>
@@ -19,6 +21,7 @@ const Day = (props: DayProps) => {
           : moment(date).format('D')
         }
       </Block.DateSpan>
+      {task && <div>{task.title}</div>}
     </Block>
   );
 };
