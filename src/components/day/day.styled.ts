@@ -1,16 +1,19 @@
-import styled, { StyledComponentBase } from "styled-components";
+import styled, { StyledComponentBase } from 'styled-components';
+import {css} from 'styled-components';
 import theme from '../../theme/theme';
-import {font} from '../../theme/mixins';
+import {font, transitionColor} from '../../theme/mixins';
 
 interface IDay extends StyledComponentBase<any, object> {
   DateSpan?: any;
 }
 
-const Day: IDay = styled.div`
+const Day: IDay = styled.div<{$isTask: boolean}>`
   width: 143px;
   height: 120px;
   
   padding: 5px 8px;
+  
+  ${transitionColor()};
   
   :nth-child(7n+1) {
     border-left: 1px solid ${theme.color.nero};
@@ -28,6 +31,22 @@ const Day: IDay = styled.div`
   
   border-right: 1px solid ${theme.color.nero};
   border-bottom: 1px solid ${theme.color.nero};
+  
+  :hover {
+    background: ${theme.color.whiteSmoke};
+  }
+  
+  ${(props) => {
+    if(props.$isTask) {
+      return css`
+        background: ${theme.color.pattensBlue};
+        
+        :hover {
+          background: ${theme.color.dodgerBlue};
+        }
+      ` 
+    }
+}}
 `;
 
 Day.DateSpan = styled.span`

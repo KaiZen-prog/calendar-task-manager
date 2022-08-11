@@ -4,7 +4,9 @@ const theme = {
     basicWhite: '#ffffff',
 
     dimGray: '#6B6B6B',
+    dodgerBlue: '#27A1FF',
     nero: '#292929',
+    pattensBlue: '#C2E4FE',
     veryLightGray: '#CFCFCF',
     whiteSmoke: '#F4F4F4',
   },

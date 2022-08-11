@@ -1,4 +1,8 @@
-import {ITask} from '../common/interfaces';
+interface ITask {
+  title?: string;
+  participants?: string;
+  date?: string
+}
 
 export const tasks: ITask[] = [
   {
