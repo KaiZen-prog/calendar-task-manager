@@ -1,12 +1,22 @@
 import {useAppSelector, useAppDispatch} from '../../hooks/hooks';
-import {getStringWithCapitalLetter} from "../../common/utils";
+import {getStringWithCapitalLetter} from '../../common/utils';
 import moment from 'moment';
 import Block from "./calendar.styled";
 import Day from '../day';
+import PopupOverview from "../popup-overview";
+import PopupCreate from "../popup-create";
+import React from "react";
 
-const Calendar = (): JSX.Element => {
+interface Props {
+  onPopupOpening: void;
+  onPopupClosure: void;
+}
+
+const Calendar: React.FunctionComponent<Props> = props => {
   const currentDate = useAppSelector(store => store.currentDate);
+  const isTaskPopupOpened = useAppSelector(store => store.isTaskPopupOpened);
   const tasks = useAppSelector(store => store.tasks);
+  const currentTask = useAppSelector(store => store.currentTask);
   const dispatch = useAppDispatch();
 
   //Получаем moment'ы предыдущего и следующего месяцев
@@ -74,11 +84,19 @@ const Calendar = (): JSX.Element => {
                 break;
               }
             }
-            return <Day key={i} date={day} dayNumber={i} task={task}/>
+            return <Day key={i} date={day} dayNumber={i} task={task} onPopupOpening={props.onPopupOpening}/>
             }
           )}
         </>
       </Block.CalendarWrapper>
+
+      {isTaskPopupOpened && currentTask &&
+      <PopupOverview task={currentTask}/>
+      }
+
+      {isTaskPopupOpened && currentTask === null &&
+      <PopupCreate/>
+      }
     </Block>
   );
 };

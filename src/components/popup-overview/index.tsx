@@ -3,13 +3,13 @@ import Block from './popup-overview.styled';
 import {ITask} from '../../common/interfaces';
 
 interface PopupProps {
-  task?: ITask | null;
+  task: ITask | null;
 }
 
-const PopupOverview = ({task}: PopupProps): JSX.Element => {
+const PopupOverview: React.FunctionComponent<PopupProps> = props => {
   return (
     <Block>
-      <p>{task?.title}</p>
+      <p>{props.task?.title}</p>
     </Block>
   );
 };

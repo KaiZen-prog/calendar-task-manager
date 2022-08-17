@@ -1,19 +1,41 @@
 import * as React from 'react';
-import {useState} from 'react';
+import {useAppDispatch} from '../../hooks/hooks';
+import {ITask} from "../../common/interfaces";
+import {KeyCode} from '../../const';
 
-const WithTaskPopup = (WrappedComponent: React.ElementType) => {
-  const [isPopupOpened, setPopupOpen] = useState(false);
+interface Props {
+  component: React.ElementType;
+  task?: ITask | null;
+}
 
-  const onPopupOpening = () => {
-    setPopupOpen(true);
-  };
+const withTaskPopup: React.FunctionComponent<Props> = props => {
+  const {component: WrappedComponent} = props;
+  const dispatch = useAppDispatch();
+
+  const onPopupOpening = (currentTask: ITask | null) => {
+    dispatch({type: 'TOGGLE_TASK_POPUP', payload: {currentTask: currentTask, isTaskPopupOpened: true}})
+    document.documentElement.style.overflow = 'hidden';
+    document.addEventListener('keydown', closePopupKeydown);
+  }
+
+  const onPopupClosure= () => {
+    dispatch({type: 'TOGGLE_TASK_POPUP', payload: {currentTask: null, isTaskPopupOpened: false}})
+    document.documentElement.style.overflow = 'auto';
+    document.removeEventListener('keydown', closePopupKeydown);
+  }
+
+  const closePopupKeydown = (evt: KeyboardEvent) => {
+    if (evt.keyCode === KeyCode.ESC) {
+      onPopupClosure();
+    }
+  }
 
   return (
     <WrappedComponent
-      isPopupOpened={isPopupOpened}
       onPopupOpening={onPopupOpening}
+      onPopupClosure={onPopupClosure}
     />
   );
 };
 
-export default WithTaskPopup;
+export default withTaskPopup;
