@@ -5,7 +5,6 @@ import {KeyCode} from '../../const';
 
 interface Props {
   component: React.ElementType;
-  task?: ITask | null;
 }
 
 const withTaskPopup: React.FunctionComponent<Props> = props => {
@@ -33,7 +32,6 @@ const withTaskPopup: React.FunctionComponent<Props> = props => {
   return (
     <WrappedComponent
       onPopupOpening={onPopupOpening}
-      onPopupClosure={onPopupClosure}
     />
   );
 };

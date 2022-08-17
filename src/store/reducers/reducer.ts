@@ -14,7 +14,9 @@ const reducer = (state = initialState, action: {type: string; payload: any;}) =>
   switch (action.type) {
     case ActionType.CHANGE_MONTH:
       return Object.assign({}, state, {
-        currentDate: action.payload
+        currentDate: action.payload,
+        currentTask: null,
+        isTaskPopupOpened: false
       });
 
     case ActionType.TOGGLE_TASK_POPUP:

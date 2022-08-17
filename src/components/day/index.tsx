@@ -8,7 +8,7 @@ interface Props {
   date: moment.Moment;
   dayNumber: number;
   task: ITask | null;
-  onPopupOpening: any;
+  onPopupOpening: (...args: any[]) => void;
 }
 
 const Day: React.FunctionComponent<Props> = props => {

@@ -8,8 +8,7 @@ import PopupCreate from "../popup-create";
 import React from "react";
 
 interface Props {
-  onPopupOpening: void;
-  onPopupClosure: void;
+  onPopupOpening: (...args: any[]) => void;
 }
 
 const Calendar: React.FunctionComponent<Props> = props => {
