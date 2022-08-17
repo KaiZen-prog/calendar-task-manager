@@ -13,6 +13,13 @@ export const transitionColor = (value=theme.animation.trans300) => css`
   transition: background ${value};
 ;`
 
+export const lineClamp = (clamp) => css`
+  display: -webkit-box;
+  -webkit-line-clamp: ${clamp};
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+`;
+
 export const button = (color, background, backgroundHovered) => css`
   display: inline-block;
 

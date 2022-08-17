@@ -80,10 +80,11 @@ Calendar.ChangeMonthButton = styled.button<{$isPrevMonth: boolean}>`
 }}
 `;
 
-Calendar.Month = styled.span`
+Calendar.Month = styled.h2`
   display: inline-block;
   
   width: 156px;
+  margin: 0;
   
   color: ${theme.color.nero};
   ${font(theme.fonts.s18l21n.size, theme.fonts.s18l21n.lineHeight, theme.fonts.s18l21n.weight)};

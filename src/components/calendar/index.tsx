@@ -4,7 +4,7 @@ import moment from 'moment';
 import Block from "./calendar.styled";
 import Day from '../day';
 
-const Calendar = () => {
+const Calendar = (): JSX.Element => {
   const currentDate = useAppSelector(store => store.currentDate);
   const tasks = useAppSelector(store => store.tasks);
   const dispatch = useAppDispatch();
@@ -67,7 +67,7 @@ const Calendar = () => {
       <Block.CalendarWrapper>
         <>
           {currentMonthDays.map((day,i) => {
-            let task ={};
+            let task = null;
             for (let j = 0; j < currentTasks.length; j++) {
               if (moment(currentTasks[j].date).format('MMMM dddd D') === moment(day).format('MMMM dddd D')) {
                 task = currentTasks[j];

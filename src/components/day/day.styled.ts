@@ -1,10 +1,12 @@
 import styled, { StyledComponentBase } from 'styled-components';
 import {css} from 'styled-components';
 import theme from '../../theme/theme';
-import {font, transitionColor} from '../../theme/mixins';
+import {font, transitionColor, lineClamp} from '../../theme/mixins';
 
 interface IDay extends StyledComponentBase<any, object> {
   DateSpan?: any;
+  TaskTitle?: any;
+  TaskParticipants?: any;
 }
 
 const Day: IDay = styled.div<{$isTask: boolean}>`
@@ -36,6 +38,10 @@ const Day: IDay = styled.div<{$isTask: boolean}>`
     background: ${theme.color.whiteSmoke};
   }
   
+  :active {
+    box-shadow: 0 0 10px 2px ${theme.color.navyBlue};
+  }
+  
   ${(props) => {
     if(props.$isTask) {
       return css`
@@ -52,6 +58,23 @@ const Day: IDay = styled.div<{$isTask: boolean}>`
 Day.DateSpan = styled.span`
   ${font(theme.fonts.s14l16n.size, theme.fonts.s14l16n.lineHeight, theme.fonts.s14l16n.weight)};
   color: ${theme.color.dimGray};
+`;
+
+Day.TaskTitle = styled.h3`
+  ${lineClamp(1)};
+  ${font(theme.fonts.s14l16n.size, theme.fonts.s14l16n.lineHeight, theme.fonts.s14l16n.weight)};
+  color: ${theme.color.nero};
+  
+  margin-top: 8px;
+  margin-bottom: 8px;
+`;
+
+Day.TaskParticipants = styled.p`
+  ${lineClamp(3)};
+  ${font(theme.fonts.s14l16n.size, theme.fonts.s14l16n.lineHeight, theme.fonts.s14l16n.weight)};
+  color: ${theme.color.dimGray};
+  
+  margin: 0;
 `;
 
 export default Day;

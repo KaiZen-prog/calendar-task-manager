@@ -1,30 +1,39 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Block from './day.styled';
 import moment from 'moment';
-import {getStringWithCapitalLetter} from "../../common/utils";
+import {getStringWithCapitalLetter} from '../../common/utils';
+import PopupOverview from '../popup-overview'
+import {ITask} from '../../common/interfaces';
 
 interface DayProps {
   date: moment.Moment;
   dayNumber: number;
-  task: Record<string, string>;
+  task: ITask | null;
 }
 
-const Day = (props: DayProps) => {
-  const {date, dayNumber, task} = props;
+const Day = ({date, dayNumber, task}: DayProps): JSX.Element => {
+  const [isPopupOpened, setPopupOpen] = useState(false);
 
-  const checkTask = () => {
-    return Object.keys(task).length !== 0;
-  }
+  const onPopupOpening = () => {
+    setPopupOpen(true);
+  };
 
   return (
-    <Block tabindex='0' $isTask={checkTask()}>
+    <Block tabindex='0' $isTask={task !== null} onClick={onPopupOpening}>
       <Block.DateSpan>
         {dayNumber < 7
           ? getStringWithCapitalLetter(moment(date).format('dddd')) + ', ' + moment(date).format('D')
           : moment(date).format('D')
         }
       </Block.DateSpan>
-      {task && <div>{task.title}</div>}
+      {task &&
+      <>
+        <Block.TaskTitle>{task.title}</Block.TaskTitle>
+        <Block.TaskParticipants>{task.participants}</Block.TaskParticipants>
+      </>}
+      {isPopupOpened && task &&
+      <PopupOverview task={task}/>
+      }
     </Block>
   );
 };

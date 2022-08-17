@@ -1,5 +1,3 @@
-export const AppRoute = {
-    ROOT: '/',
-    CATALOG: '/catalog',
-    CART: '/cart'
+export const KeyCode = {
+    ESC: 27,
 };

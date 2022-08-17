@@ -1,8 +1,4 @@
-interface ITask {
-  title?: string;
-  participants?: string;
-  date?: string
-}
+import {ITask} from '../common/interfaces';
 
 export const tasks: ITask[] = [
   {
@@ -12,21 +8,15 @@ export const tasks: ITask[] = [
   },
 
   {
-    title: 'Отправка корреспонденции',
-    participants: 'Захар',
-    date: '2022-08-02',
+    title: 'Шашлыки',
+    participants: 'Филипп Коров, Дмитрий Табасков',
+    date: '2022-08-04',
   },
 
   {
-    title: 'Поход в баню',
-    participants: 'Тимофей, Семен Андреевич, Александр Иванов',
-    date: '2022-08-18',
-  },
-
-  {
-    title: 'Шахматный турнир',
-    participants: 'Иосиф Орджоникидзе, Артемон, Гендальф Серый',
-    date: '2022-08-06',
+    title: 'Аква кутеж',
+    participants: 'Михаил Шустин, Владимир Пупкин, Дмитрий Медев',
+    date: '2022-08-22',
   },
 
   {
