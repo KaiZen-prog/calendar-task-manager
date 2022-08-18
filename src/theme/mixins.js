@@ -20,6 +20,18 @@ export const lineClamp = (clamp) => css`
   overflow: hidden;
 `;
 
+export const taskPopup = () => css`
+  position:absolute;
+  
+  top: 50%;
+  left: 50%;
+  
+  background-color: ${theme.color.basicWhite};
+  filter: drop-shadow(0px 0px 7px rgba(0, 0, 0, 0.25));
+  
+  cursor: pointer;
+`;
+
 export const button = (color, background, backgroundHovered) => css`
   display: inline-block;
 

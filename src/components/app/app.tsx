@@ -3,7 +3,7 @@ import {HashRouter } from 'react-router-dom';
 import Calendar from '../calendar';
 import ControlPanel from "../control-panel";
 import GlobalStyle from '../../theme/globalStyle';
-import WithTaskPopup from "../../hocs/with-task-popup/with-task-popup";
+import WithTaskPopup from '../../hocs/with-task-popup/with-task-popup';
 
 const App = () => {
   return (
