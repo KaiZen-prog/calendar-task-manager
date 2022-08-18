@@ -36,7 +36,12 @@ const theme = {
     trans300: '0.3s ease;',
   },
 
-  CalendarWidth: '1000px',
+  calendarWidth: '1000px',
+
+  daySize: {
+    width: 143,
+    height: 120,
+  }
 };
 
 export default theme;

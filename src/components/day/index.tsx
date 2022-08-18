@@ -1,3 +1,4 @@
+import {useRef} from 'react';
 import Block from './day.styled';
 import moment from 'moment';
 import {getStringWithCapitalLetter} from '../../common/utils';
@@ -14,8 +15,10 @@ interface Props {
 const Day: React.FunctionComponent<Props> = props => {
   const {date, dayNumber, task, onPopupOpening} = props;
 
+  const dayRef = useRef<HTMLInputElement>(null);
+
   return (
-    <Block tabindex='0' $isTask={task !== null} onClick={()=>{onPopupOpening(task)}}>
+    <Block ref={dayRef} tabindex='0' $isTask={task !== null} onClick={()=>{onPopupOpening(dayRef, task)}}>
       <Block.DateSpan>
         {dayNumber < 7
           ? getStringWithCapitalLetter(moment(date).format('dddd')) + ', ' + moment(date).format('D')

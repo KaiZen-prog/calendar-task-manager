@@ -12,7 +12,7 @@ interface ICalendar extends StyledComponentBase<any, object> {
 }
 
 const Calendar: ICalendar = styled.section`
-  width: ${theme.CalendarWidth};
+  width: ${theme.calendarWidth};
   
   margin-right: auto;
   margin-left: auto;

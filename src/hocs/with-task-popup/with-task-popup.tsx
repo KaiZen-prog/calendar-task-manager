@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {ITask} from '../../common/interfaces';
 import {KeyCode} from '../../const';
@@ -13,11 +14,18 @@ interface Props {
 const WithTaskPopup: React.FunctionComponent<Props> = props => {
   const {component: WrappedComponent} = props;
 
+  const [coordinate, setCoordinate] = useState({x: 0, y: 0});
+
   const dispatch = useAppDispatch();
   const isTaskPopupOpened = useAppSelector(store => store.isTaskPopupOpened);
   const currentTask = useAppSelector(store => store.currentTask);
 
-  const onPopupOpening = (currentTask: ITask | null) => {
+  const onPopupOpening = (ref: React.RefObject<HTMLInputElement>, currentTask: ITask | null) => {
+    const rect = ref?.current?.getBoundingClientRect();
+    if (rect) {
+      setCoordinate({x: Math.floor(rect.x), y: Math.floor(rect.y)})
+    }
+
     dispatch({type: 'TOGGLE_TASK_POPUP', payload: {currentTask: currentTask, isTaskPopupOpened: true}})
     document.documentElement.style.overflow = 'hidden';
     document.addEventListener('keydown', closePopupKeydown);
@@ -40,10 +48,20 @@ const WithTaskPopup: React.FunctionComponent<Props> = props => {
       <WrappedComponent onPopupOpening={onPopupOpening}/>
 
       {(isTaskPopupOpened && currentTask) && (
-        <TaskPopup task={currentTask} component={TaskPopupOverview}/>
+        <TaskPopup
+          coordinateX={coordinate.x}
+          coordinateY={coordinate.y}
+          task={currentTask}
+          component={TaskPopupOverview}
+        />
       )}
       {(isTaskPopupOpened && currentTask === null) && (
-        <TaskPopup task={currentTask} component={TaskPopupCreate}/>
+        <TaskPopup
+          coordinateX={coordinate.x}
+          coordinateY={coordinate.y}
+          task={currentTask}
+          component={TaskPopupCreate}
+        />
       )}
     </>
   );

@@ -8,13 +8,15 @@ const modalRoot = document.getElementById('modal-root')  as HTMLElement;
 interface Props {
   task: ITask | null;
   component: React.ElementType;
+  coordinateX: number;
+  coordinateY: number;
 }
 
 const TaskPopup: React.FunctionComponent<Props> = props => {
-  const {task, component: WrappedComponent} = props;
+  const {task, component: WrappedComponent, coordinateX, coordinateY} = props;
 
   return ReactDOM.createPortal(
-    <Block>
+    <Block $coordinateX={coordinateX} $coordinateY={coordinateY}>
       <WrappedComponent task={task}/>
     </Block>,
     modalRoot,
