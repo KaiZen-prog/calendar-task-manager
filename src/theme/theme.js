@@ -13,6 +13,12 @@ const theme = {
   },
 
   fonts: {
+    s14l16l: {
+      size: '14',
+      lineHeight: '16',
+      weight: '300',
+    },
+
     s12l14n : {
       size: '12',
       lineHeight: '14',
@@ -39,8 +45,8 @@ const theme = {
   calendarWidth: '1000px',
 
   daySize: {
-    width: 143,
-    height: 120,
+    offsetX: 10,
+    offsetY: 1,
   }
 };
 

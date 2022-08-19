@@ -14,26 +14,27 @@ interface Props {
 const WithTaskPopup: React.FunctionComponent<Props> = props => {
   const {component: WrappedComponent} = props;
 
+  const dispatch = useAppDispatch();
+
   const [coordinate, setCoordinate] = useState({x: 0, y: 0});
 
-  const dispatch = useAppDispatch();
   const isTaskPopupOpened = useAppSelector(store => store.isTaskPopupOpened);
   const currentTask = useAppSelector(store => store.currentTask);
 
   const onPopupOpening = (ref: React.RefObject<HTMLInputElement>, currentTask: ITask | null) => {
+    document.documentElement.style.overflow = 'hidden';
     const rect = ref?.current?.getBoundingClientRect();
     if (rect) {
-      setCoordinate({x: Math.floor(rect.x), y: Math.floor(rect.y)})
+      setCoordinate({x: Math.floor(rect.right), y: Math.floor(rect.top)});
     }
 
     dispatch({type: 'TOGGLE_TASK_POPUP', payload: {currentTask: currentTask, isTaskPopupOpened: true}})
-    document.documentElement.style.overflow = 'hidden';
     document.addEventListener('keydown', closePopupKeydown);
   }
 
   const onPopupClosure= () => {
-    dispatch({type: 'TOGGLE_TASK_POPUP', payload: {currentTask: null, isTaskPopupOpened: false}})
     document.documentElement.style.overflow = 'auto';
+    dispatch({type: 'TOGGLE_TASK_POPUP', payload: {currentTask: null, isTaskPopupOpened: false}})
     document.removeEventListener('keydown', closePopupKeydown);
   }
 
@@ -49,18 +50,18 @@ const WithTaskPopup: React.FunctionComponent<Props> = props => {
 
       {(isTaskPopupOpened && currentTask) && (
         <TaskPopup
-          coordinateX={coordinate.x}
-          coordinateY={coordinate.y}
+          coordinate={coordinate}
           task={currentTask}
           component={TaskPopupOverview}
+          onPopupClosure={onPopupClosure}
         />
       )}
       {(isTaskPopupOpened && currentTask === null) && (
         <TaskPopup
-          coordinateX={coordinate.x}
-          coordinateY={coordinate.y}
+          coordinate={coordinate}
           task={currentTask}
           component={TaskPopupCreate}
+          onPopupClosure={onPopupClosure}
         />
       )}
     </>

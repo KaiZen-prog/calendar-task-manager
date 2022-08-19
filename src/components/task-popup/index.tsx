@@ -8,16 +8,21 @@ const modalRoot = document.getElementById('modal-root')  as HTMLElement;
 interface Props {
   task: ITask | null;
   component: React.ElementType;
-  coordinateX: number;
-  coordinateY: number;
+  coordinate: {x: number, y: number};
+  onPopupClosure: (...args: any[]) => void;
 }
 
 const TaskPopup: React.FunctionComponent<Props> = props => {
-  const {task, component: WrappedComponent, coordinateX, coordinateY} = props;
+  const {task, component: WrappedComponent, coordinate, onPopupClosure} = props;
 
   return ReactDOM.createPortal(
-    <Block $coordinateX={coordinateX} $coordinateY={coordinateY}>
-      <WrappedComponent task={task}/>
+    <Block $coordinateX={coordinate.x} $coordinateY={coordinate.y}>
+      <Block.Wrapper>
+        <WrappedComponent task={task}/>
+        <Block.CloseButton type='button' onClick={onPopupClosure}>
+          <span className="visually-hidden">Закрыть</span>
+        </Block.CloseButton>
+      </Block.Wrapper>
     </Block>,
     modalRoot,
   );

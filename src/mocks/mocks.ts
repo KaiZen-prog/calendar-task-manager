@@ -8,8 +8,8 @@ export const tasks: ITask[] = [
   },
 
   {
-    title: 'Шашлыки',
-    participants: 'Филипп Коров, Дмитрий Табасков',
+    title: 'Сдача проекта',
+    participants: 'Я',
     date: '2022-08-04',
   },
 
