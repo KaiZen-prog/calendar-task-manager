@@ -4,7 +4,6 @@ import theme from '../../theme/theme';
 
 interface ITaskPopup extends StyledComponentBase<any, object> {
   Wrapper?: any;
-  CloseButton?: any;
 }
 
 interface Props {
@@ -14,6 +13,7 @@ interface Props {
 
 const TaskPopup: ITaskPopup = styled.div<Props>`
   ${taskPopup()};
+  min-width: 290px;
   
   top: ${props => props.$coordinateY + theme.daySize.offsetY}px;
   left: ${props => props.$coordinateX + theme.daySize.offsetX}px;
@@ -36,15 +36,6 @@ TaskPopup.Wrapper = styled.div`
     border: 10px solid transparent;
     border-right-color: ${theme.color.basicWhite};
 }
-`
-
-TaskPopup.CloseButton = styled.button`
-  position: absolute;
-  
-  top: 10px;
-  right: 10px;
-  
-  cursor: pointer;
 `
 
 export default TaskPopup;

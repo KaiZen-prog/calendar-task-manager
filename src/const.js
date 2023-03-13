@@ -16,3 +16,10 @@ export const Months = [
   'ноября',
   'декабря',
 ]
+
+export const ButtonCrossSize = {
+  little: 6,
+  big: 12,
+
+  expandedArea: 20
+}

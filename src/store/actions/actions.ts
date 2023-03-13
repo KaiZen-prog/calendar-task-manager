@@ -1,4 +1,5 @@
 export const ActionType = {
+  APP_INIT: 'APP_INIT',
   CHANGE_MONTH: 'CHANGE_MONTH',
   TOGGLE_TASK_POPUP: 'TOGGLE_TASK_POPUP',
 };

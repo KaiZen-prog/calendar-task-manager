@@ -67,3 +67,20 @@ export const backgroundImage = (logo, width, height) => css`
   background-image: url(${logo});
   background-repeat: no-repeat;
 `;
+
+export const expandInteractiveArea = (width, height) => css`
+  position: relative;
+  
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    width: ${width}px;
+    height: ${height}px;
+  
+    content: "";
+    transform: translate(-50%, -50%);
+  }
+`
+

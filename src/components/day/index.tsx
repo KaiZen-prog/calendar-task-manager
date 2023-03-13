@@ -1,7 +1,7 @@
 import {useRef} from 'react';
 import Block from './day.styled';
 import moment from 'moment';
-import {getStringWithCapitalLetter,} from '../../common/utils';
+import {getStringWithCapitalLetter} from '../../common/utils';
 import {ITask} from '../../common/interfaces';
 import React from "react";
 

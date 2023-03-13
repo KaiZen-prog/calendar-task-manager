@@ -2,6 +2,9 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import {ITask} from '../../common/interfaces';
 import Block from './task-popup.styled';
+import {ButtonCrossSize} from '../../const';
+import ButtonCross from '../button-cross';
+
 
 const modalRoot = document.getElementById('modal-root')  as HTMLElement;
 
@@ -19,9 +22,9 @@ const TaskPopup: React.FunctionComponent<Props> = props => {
     <Block $coordinateX={coordinate.x} $coordinateY={coordinate.y}>
       <Block.Wrapper>
         <WrappedComponent task={task}/>
-        <Block.CloseButton type='button' onClick={onPopupClosure}>
-          <span className="visually-hidden">Закрыть</span>
-        </Block.CloseButton>
+        <ButtonCross
+          buttonSize={ButtonCrossSize.little}
+          onButtonClick={onPopupClosure}/>
       </Block.Wrapper>
     </Block>,
     modalRoot,

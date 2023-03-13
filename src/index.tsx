@@ -10,3 +10,17 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
+
+const promise = new Promise(() => {
+  store.dispatch({type: 'APP_INIT', payload: null})
+});
+
+promise
+  .then(() => {
+    ReactDOM.render(
+      <Provider store={store}>
+        <App/>
+      </Provider>,
+      document.querySelector(`#root`)
+    );
+  });

@@ -4,6 +4,7 @@ import moment from 'moment';
 import Block from './calendar.styled';
 import Day from '../day';
 import React from "react";
+import {ITask} from '../../common/interfaces';
 
 interface Props {
   onPopupOpening: (...args: any[]) => void;
@@ -11,7 +12,7 @@ interface Props {
 
 const Calendar: React.FunctionComponent<Props> = props => {
   const currentDate = useAppSelector(store => store.currentDate);
-  const tasks = useAppSelector(store => store.tasks);
+  const tasks : ITask[] = useAppSelector(store => store.tasks);
   const dispatch = useAppDispatch();
 
   //Получаем moment'ы предыдущего и следующего месяцев
@@ -23,7 +24,7 @@ const Calendar: React.FunctionComponent<Props> = props => {
     return Array.from({length: moment(date).daysInMonth()}, (x, i) => moment(date).startOf('month').add(i, 'days'));
   };
 
-  let currentMonthDays: any[] = getDaysArray(currentDate);
+  let currentMonthDays: moment.Moment[] = getDaysArray(currentDate);
 
   //Если текущий месяц не начинается с понедельника,
   //то собирем массив дней из последней недели предыдущего месяца, начиная с понедельника
