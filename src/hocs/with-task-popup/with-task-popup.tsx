@@ -32,7 +32,7 @@ const WithTaskPopup: React.FunctionComponent<Props> = props => {
     document.addEventListener('keydown', closePopupKeydown);
   }
 
-  const onPopupClosure= () => {
+  const onPopupClosure = () => {
     document.documentElement.style.overflow = 'auto';
     dispatch({type: 'TOGGLE_TASK_POPUP', payload: {currentTask: null, isTaskPopupOpened: false}})
     document.removeEventListener('keydown', closePopupKeydown);

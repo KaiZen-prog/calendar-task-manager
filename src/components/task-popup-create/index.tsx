@@ -34,53 +34,51 @@ const TaskPopupCreate: React.FunctionComponent = () => {
   };
 
   return (
-    <Block>
-      <Block.Form action="#" onSubmit={submitHandler}>
-        <Block.Label for="taskName">
-          Название события
-        </Block.Label>
-        <Block.Input
-          id="taskName"
-          type="text"
-          name="taskName"
-          placeholder="Событие"
-          onChange={onLogInFieldChange}
-          value={state.taskName}
-          autoFocus
-          required
-        />
+    <Block action="#" onSubmit={submitHandler}>
+      <Block.Label htmlFor="taskName">
+        Название события
+      </Block.Label>
+      <Block.Input
+        id="taskName"
+        type="text"
+        name="taskName"
+        placeholder="Событие"
+        onChange={onLogInFieldChange}
+        value={state.taskName}
+        autoFocus
+        required
+      />
 
 
-        <Block.Label for="taskDate">
-          Дата события
-        </Block.Label>
-        <Block.Input
-          id="taskDate"
-          type="date"
-          name="taskDate"
-          placeholder="День, месяц, год"
-          onChange={onLogInFieldChange}
-          value={state.taskDate}
-          autoFocus
-          required
-        />
+      <Block.Label htmlFor="taskDate">
+        Дата события
+      </Block.Label>
+      <Block.Input
+        id="taskDate"
+        type="date"
+        name="taskDate"
+        placeholder="День, месяц, год"
+        onChange={onLogInFieldChange}
+        value={state.taskDate}
+        autoFocus
+        required
+      />
 
 
-        <Block.Label for="taskParticipants">
-          Участники
-        </Block.Label>
-        <Block.Input
-          id="taskParticipants"
-          type="text"
-          name="taskParticipants"
-          placeholder="Имена участников"
-          onChange={onLogInFieldChange}
-          value={state.taskParticipants}
-          autoFocus
-          required
-        />
-        <Block.Submit type="submit">Войти</Block.Submit>
-      </Block.Form>
+      <Block.Label htmlFor="taskParticipants">
+        Участники
+      </Block.Label>
+      <Block.Input
+        id="taskParticipants"
+        type="text"
+        name="taskParticipants"
+        placeholder="Имена участников"
+        onChange={onLogInFieldChange}
+        value={state.taskParticipants}
+        autoFocus
+        required
+      />
+      <Block.Submit type="submit">Войти</Block.Submit>
     </Block>
   );
 };
