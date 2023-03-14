@@ -1,6 +1,6 @@
 import {ITask} from '../common/interfaces';
 
-export const tasks: ITask[] = [
+export const mockTasks: ITask[] = [
   {
     title: 'Встреча Августа',
     participants: 'Я',

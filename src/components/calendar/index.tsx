@@ -1,10 +1,11 @@
 import {useAppSelector, useAppDispatch} from '../../hooks/hooks';
+import React, {useEffect} from 'react';
 import {getStringWithCapitalLetter, adaptMomentToString} from '../../common/utils';
 import moment from 'moment';
 import Block from './calendar.styled';
 import Day from '../day';
-import React from "react";
 import {ITask} from '../../common/interfaces';
+import {ActionType} from '../../store/actions/actions';
 
 interface Props {
   onPopupOpening: (...args: any[]) => void;
@@ -14,6 +15,11 @@ const Calendar: React.FunctionComponent<Props> = props => {
   const currentDate = useAppSelector(store => store.currentDate);
   const tasks : ITask[] = useAppSelector(store => store.tasks);
   const dispatch = useAppDispatch();
+
+  //При обновлении списка задач в сторе, заносим его в localStorage
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   //Получаем moment'ы предыдущего и следующего месяцев
   const nextMonth = moment(currentDate).add(1, 'month');
@@ -53,20 +59,20 @@ const Calendar: React.FunctionComponent<Props> = props => {
   return (
     <Block>
       <Block.ButtonsWrapper>
-        <Block.ChangeMonthButton type='button' $isPrevMonth onClick={() => dispatch({type: 'CHANGE_MONTH', payload: prevMonth})}>
+        <Block.ChangeMonthButton type='button' $isPrevMonth onClick={() => dispatch({type: ActionType.CHANGE_MONTH, payload: prevMonth})}>
           <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path d="M15.1158 8.52066L6.24034 2.46262C5.83045 2.18266 5.41746 2.03448 5.07419 2.03448C4.41053 2.03448 4 2.56553 4 3.45443V16.5476C4 17.4355 4.41002 17.9655 5.07212 17.9655C5.41591 17.9655 5.82231 17.8172 6.2331 17.5365L15.1127 11.4786C15.6838 11.0883 16 10.5632 16 9.99929C16.0001 9.43575 15.6875 8.91076 15.1158 8.52066Z" fill="currentcolor"/>
           </svg>
           <span className="visually-hidden">Назад</span>
         </Block.ChangeMonthButton>
         <Block.Month>{getStringWithCapitalLetter(moment(currentDate).format('MMMM YYYY'))}</Block.Month>
-        <Block.ChangeMonthButton type='button' onClick={() => dispatch({type: 'CHANGE_MONTH', payload: nextMonth})}>
+        <Block.ChangeMonthButton type='button' onClick={() => dispatch({type: ActionType.CHANGE_MONTH, payload: nextMonth})}>
           <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path d="M15.1158 8.52066L6.24034 2.46262C5.83045 2.18266 5.41746 2.03448 5.07419 2.03448C4.41053 2.03448 4 2.56553 4 3.45443V16.5476C4 17.4355 4.41002 17.9655 5.07212 17.9655C5.41591 17.9655 5.82231 17.8172 6.2331 17.5365L15.1127 11.4786C15.6838 11.0883 16 10.5632 16 9.99929C16.0001 9.43575 15.6875 8.91076 15.1158 8.52066Z" fill="currentcolor"/>
           </svg>
           <span className="visually-hidden">Вперед</span>
         </Block.ChangeMonthButton>
-        <Block.ResetMonthButton type='button' onClick={() => dispatch({type: 'CHANGE_MONTH', payload: moment()})}>
+        <Block.ResetMonthButton type='button' onClick={() => dispatch({type: ActionType.CHANGE_MONTH, payload: moment()})}>
           Сегодня
         </Block.ResetMonthButton>
       </Block.ButtonsWrapper>

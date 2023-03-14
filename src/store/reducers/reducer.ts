@@ -1,7 +1,7 @@
 import moment from 'moment';
 import 'moment/locale/ru';
 import {ActionType} from '../actions/actions';
-import {tasks} from '../../mocks/mocks';
+import {mockTasks} from '../../mocks/mocks';
 
 const initialState = {
   currentDate: moment(),
@@ -13,15 +13,19 @@ const initialState = {
 const reducer = (state = initialState, action: {type: string; payload: any;}) => {
   switch (action.type) {
 
-    case ActionType.APP_INIT:
+    case ActionType.ADD_TASK:
+      return Object.assign({}, state, {
+        tasks: [...state.tasks, action.payload]
+      });
+
+    case ActionType.REFRESH_TASKS:
       if (localStorage.getItem('tasks') !== null) {
         return Object.assign({}, state, {
           tasks: JSON.parse(<string>localStorage.getItem('tasks'))
         });
       } else {
-        localStorage.setItem('tasks', JSON.stringify(tasks));
         return Object.assign({}, state, {
-          tasks: tasks
+          tasks: mockTasks
         });
       }
 

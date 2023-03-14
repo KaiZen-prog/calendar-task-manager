@@ -12,7 +12,7 @@ ReactDOM.render(
 );
 
 const promise = new Promise(() => {
-  store.dispatch({type: 'APP_INIT', payload: null})
+  store.dispatch({type: 'REFRESH_TASKS', payload: null})
 });
 
 promise
