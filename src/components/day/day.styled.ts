@@ -1,4 +1,4 @@
-import styled, { StyledComponentBase } from 'styled-components';
+import styled, {StyledComponentBase} from 'styled-components';
 import {css} from 'styled-components';
 import theme from '../../theme/theme';
 import {font, transitionColor, lineClamp} from '../../theme/mixins';
@@ -33,6 +33,8 @@ const Day: IDay = styled.div<{$isTask: boolean}>`
   
   border-right: 1px solid ${theme.color.nero};
   border-bottom: 1px solid ${theme.color.nero};
+  
+  cursor: pointer;
   
   :hover {
     background: ${theme.color.whiteSmoke};

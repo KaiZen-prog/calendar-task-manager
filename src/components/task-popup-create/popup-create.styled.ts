@@ -4,7 +4,6 @@ import {visuallyHidden} from '../../theme/mixins';
 interface ITaskPopupCreate extends StyledComponentBase<any, object> {
   Label?: any;
   Input?: any;
-  Submit?: any;
 }
 
 const TaskPopupCreate: ITaskPopupCreate = styled.form`
@@ -18,8 +17,5 @@ TaskPopupCreate.Input = styled.input`
 
 `;
 
-TaskPopupCreate.Submit = styled.button`
-
-`;
 
 export default TaskPopupCreate;

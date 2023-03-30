@@ -4,6 +4,7 @@ import Block from './popup-create.styled';
 import {InputChangeEventHandler, FormSubmitEventHandler} from '../../common/types';
 import moment from 'moment';
 import {ActionType} from '../../store/actions/actions';
+import ExtraButton from '../button-extra';
 
 const TaskPopupCreate: React.FunctionComponent = () => {
 
@@ -78,7 +79,10 @@ const TaskPopupCreate: React.FunctionComponent = () => {
         autoFocus
         required
       />
-      <Block.Submit type="submit">Войти</Block.Submit>
+      <ExtraButton
+        title={"Создать"}
+        type={"submit"}
+      />
     </Block>
   );
 };

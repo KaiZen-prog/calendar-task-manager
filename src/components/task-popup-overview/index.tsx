@@ -1,7 +1,10 @@
 import React from 'react';
+import {useAppDispatch} from '../../hooks/hooks';
 import {getStringWithDayNumberAndMonth} from '../../common/utils';
 import Block from './popup-overview.styled';
 import {ITask} from '../../common/interfaces';
+import {ActionType} from '../../store/actions/actions';
+import ExtraButton from '../button-extra';
 
 interface TaskPopupProps {
   task: ITask;
@@ -9,6 +12,8 @@ interface TaskPopupProps {
 
 const TaskPopupOverview: React.FunctionComponent<TaskPopupProps> = props => {
   const {task} = props;
+
+  const dispatch = useAppDispatch();
 
   return (
     <Block>
@@ -24,6 +29,11 @@ const TaskPopupOverview: React.FunctionComponent<TaskPopupProps> = props => {
       <Block.Participants>
         {task.participants}
       </Block.Participants>
+
+      <ExtraButton
+        title={"Удалить"}
+        handler={() => dispatch({type: ActionType.DELETE_TASK, payload: task.date})}
+      />
     </Block>
   );
 };

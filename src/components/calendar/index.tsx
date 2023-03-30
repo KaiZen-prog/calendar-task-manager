@@ -1,11 +1,12 @@
-import {useAppSelector, useAppDispatch} from '../../hooks/hooks';
 import React, {useEffect} from 'react';
+import {useAppSelector, useAppDispatch} from '../../hooks/hooks';
 import {getStringWithCapitalLetter, adaptMomentToString} from '../../common/utils';
 import moment from 'moment';
 import Block from './calendar.styled';
 import Day from '../day';
 import {ITask} from '../../common/interfaces';
 import {ActionType} from '../../store/actions/actions';
+import ExtraButton from '../button-extra';
 
 interface Props {
   onPopupOpening: (...args: any[]) => void;
@@ -16,7 +17,7 @@ const Calendar: React.FunctionComponent<Props> = props => {
   const tasks : ITask[] = useAppSelector(store => store.tasks);
   const dispatch = useAppDispatch();
 
-  //При обновлении списка задач в сторе, заносим его в localStorage
+  //При изменении задач в сторе, обновляем их и в localStorage
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
@@ -72,10 +73,12 @@ const Calendar: React.FunctionComponent<Props> = props => {
           </svg>
           <span className="visually-hidden">Вперед</span>
         </Block.ChangeMonthButton>
-        <Block.ResetMonthButton type='button' onClick={() => dispatch({type: ActionType.CHANGE_MONTH, payload: moment()})}>
-          Сегодня
-        </Block.ResetMonthButton>
+        <ExtraButton
+          title={"Сегодня"}
+          handler={() => dispatch({type: ActionType.CHANGE_MONTH, payload: moment()})}
+        />
       </Block.ButtonsWrapper>
+
       <Block.CalendarWrapper>
         <>
           {currentMonthDays.map((day,i) => {

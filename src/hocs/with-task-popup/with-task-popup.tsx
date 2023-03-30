@@ -6,6 +6,7 @@ import {KeyCode} from '../../const';
 import TaskPopup from '../../components/task-popup';
 import TaskPopupOverview from '../../components/task-popup-overview';
 import TaskPopupCreate from '../../components/task-popup-create';
+import {ActionType} from '../../store/actions/actions';
 
 interface Props {
   component: React.ElementType;
@@ -28,13 +29,13 @@ const WithTaskPopup: React.FunctionComponent<Props> = props => {
       setCoordinate({x: Math.floor(rect.right), y: Math.floor(rect.top)});
     }
 
-    dispatch({type: 'TOGGLE_TASK_POPUP', payload: {currentTask: currentTask, isTaskPopupOpened: true}})
+    dispatch({type: ActionType.TOGGLE_TASK_POPUP, payload: {currentTask: currentTask, isTaskPopupOpened: true}})
     document.addEventListener('keydown', closePopupKeydown);
   }
 
   const onPopupClosure = () => {
     document.documentElement.style.overflow = 'auto';
-    dispatch({type: 'TOGGLE_TASK_POPUP', payload: {currentTask: null, isTaskPopupOpened: false}})
+    dispatch({type: ActionType.TOGGLE_TASK_POPUP, payload: {currentTask: null, isTaskPopupOpened: false}})
     document.removeEventListener('keydown', closePopupKeydown);
   }
 

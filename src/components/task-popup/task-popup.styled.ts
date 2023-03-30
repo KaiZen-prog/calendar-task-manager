@@ -22,9 +22,7 @@ const TaskPopup: ITaskPopup = styled.div<Props>`
 TaskPopup.Wrapper = styled.div`
   position: relative;
   
-  padding-top: 28px;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding: 28px 12px 12px;
   
   ::before {
     content: "";

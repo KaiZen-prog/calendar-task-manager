@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import store from './store/store';
 import {Provider} from 'react-redux';
 import App from './components/app/app';
+import {ActionType} from './store/actions/actions';
 
 ReactDOM.render(
     <Provider store={store}>
@@ -11,8 +12,9 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
+//Умело изображаем запрос на сервер
 const promise = new Promise(() => {
-  store.dispatch({type: 'REFRESH_TASKS', payload: null})
+  store.dispatch({type: ActionType.SET_TASKS})
 });
 
 promise
