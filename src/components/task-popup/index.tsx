@@ -9,7 +9,7 @@ import ButtonCross from '../button-cross';
 const modalRoot = document.getElementById('modal-root')  as HTMLElement;
 
 interface Props {
-  task: ITask | null;
+  task?: ITask;
   component: React.ElementType;
   coordinate: {x: number, y: number};
   onPopupClosure: (...args: any[]) => void;

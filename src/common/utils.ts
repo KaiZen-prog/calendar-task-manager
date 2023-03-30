@@ -16,3 +16,7 @@ export const getStringWithDayNumberAndMonth = (date: moment.Moment | string) => 
 export const adaptMomentToString = (date: moment.Moment | string) => {
   return moment(date).format('MMMM dddd D');
 }
+
+export const adaptMomentToTask = (date: moment.Moment | string) => {
+  return moment(date).format('YYYY') + '-' + moment(date).format('MM') + '-' + moment(date).format('DD');
+}

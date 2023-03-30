@@ -6,6 +6,7 @@ import {ITask} from '../../common/interfaces';
 
 const initialState = {
   currentDate: moment(),
+  chosenDay: '',
   tasks: [],
   currentTask: null,
   isTaskPopupOpened: false,
@@ -14,8 +15,8 @@ const initialState = {
 const reducer = (state = initialState, action: {type: string; payload?: any;}) => {
   switch (action.type) {
 
-    //В начале работы приложения получаем задачи из localStorage
-    //Если там пусто, берем из моков
+    //Получаем задачи из localStorage
+    //Если там пусто, берем их из моков
     case ActionType.SET_TASKS:
       if (localStorage.getItem('tasks') !== null) {
         return Object.assign({}, state, {
@@ -28,7 +29,6 @@ const reducer = (state = initialState, action: {type: string; payload?: any;}) =
       }
 
     case ActionType.ADD_TASK:
-
       return Object.assign({}, state, {
         tasks: [...state.tasks, action.payload],
         currentTask: null,
@@ -51,6 +51,7 @@ const reducer = (state = initialState, action: {type: string; payload?: any;}) =
 
     case ActionType.TOGGLE_TASK_POPUP:
       return Object.assign({}, state, {
+        chosenDay: action.payload.chosenDay,
         currentTask: action.payload.currentTask,
         isTaskPopupOpened: action.payload.isTaskPopupOpened
       });

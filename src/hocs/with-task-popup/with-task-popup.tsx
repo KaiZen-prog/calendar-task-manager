@@ -22,14 +22,15 @@ const WithTaskPopup: React.FunctionComponent<Props> = props => {
   const isTaskPopupOpened = useAppSelector(store => store.isTaskPopupOpened);
   const currentTask = useAppSelector(store => store.currentTask);
 
-  const onPopupOpening = (ref: React.RefObject<HTMLInputElement>, currentTask: ITask | null) => {
+  const onPopupOpening = (ref: React.RefObject<HTMLInputElement>, date: string, currentTask: ITask | null) => {
     document.documentElement.style.overflow = 'hidden';
+
     const rect = ref?.current?.getBoundingClientRect();
     if (rect) {
       setCoordinate({x: Math.floor(rect.right), y: Math.floor(rect.top)});
     }
 
-    dispatch({type: ActionType.TOGGLE_TASK_POPUP, payload: {currentTask: currentTask, isTaskPopupOpened: true}})
+    dispatch({type: ActionType.TOGGLE_TASK_POPUP, payload: {currentTask: currentTask, chosenDay: date, isTaskPopupOpened: true}})
     document.addEventListener('keydown', closePopupKeydown);
   }
 
@@ -60,7 +61,6 @@ const WithTaskPopup: React.FunctionComponent<Props> = props => {
       {(isTaskPopupOpened && currentTask === null) && (
         <TaskPopup
           coordinate={coordinate}
-          task={currentTask}
           component={TaskPopupCreate}
           onPopupClosure={onPopupClosure}
         />

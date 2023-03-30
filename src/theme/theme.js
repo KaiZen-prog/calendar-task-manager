@@ -8,6 +8,7 @@ const theme = {
     navyBlue: '#0271C7',
     nero: '#292929',
     pattensBlue: '#C2E4FE',
+    valencia: '#E94E4E',
     veryLightGray: '#CFCFCF',
     whiteSmoke: '#F4F4F4',
   },

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useAppDispatch} from '../../hooks/hooks';
+import {useAppSelector, useAppDispatch} from '../../hooks/hooks';
 import Block from './popup-create.styled';
 import {InputChangeEventHandler, FormSubmitEventHandler} from '../../common/types';
 import moment from 'moment';
@@ -7,15 +7,16 @@ import {ActionType} from '../../store/actions/actions';
 import ExtraButton from '../button-extra';
 
 const TaskPopupCreate: React.FunctionComponent = () => {
-
+  const chosenDay = useAppSelector(store => store.chosenDay);
   const dispatch = useAppDispatch();
+
   const [state, setState] = useState({
     taskName: '',
     taskDate: moment.now(),
     taskParticipants: '',
   });
 
-  const onLogInFieldChange: InputChangeEventHandler = (evt) => {
+  const onInputChange: InputChangeEventHandler = (evt) => {
     const {name, value} = evt.target;
 
     setState((prevState) => ({
@@ -30,7 +31,7 @@ const TaskPopupCreate: React.FunctionComponent = () => {
     dispatch({type: ActionType.ADD_TASK, payload: {
         title: state.taskName,
         participants: state.taskParticipants,
-        date: moment(state.taskDate).format('YYYY-MM-DD'),
+        date: chosenDay,
       }});
   };
 
@@ -44,27 +45,11 @@ const TaskPopupCreate: React.FunctionComponent = () => {
         type="text"
         name="taskName"
         placeholder="Событие"
-        onChange={onLogInFieldChange}
+        onChange={onInputChange}
         value={state.taskName}
         autoFocus
         required
       />
-
-
-      <Block.Label htmlFor="taskDate">
-        Дата события
-      </Block.Label>
-      <Block.Input
-        id="taskDate"
-        type="date"
-        name="taskDate"
-        placeholder="День, месяц, год"
-        onChange={onLogInFieldChange}
-        value={state.taskDate}
-        autoFocus
-        required
-      />
-
 
       <Block.Label htmlFor="taskParticipants">
         Участники
@@ -74,7 +59,7 @@ const TaskPopupCreate: React.FunctionComponent = () => {
         type="text"
         name="taskParticipants"
         placeholder="Имена участников"
-        onChange={onLogInFieldChange}
+        onChange={onInputChange}
         value={state.taskParticipants}
         autoFocus
         required

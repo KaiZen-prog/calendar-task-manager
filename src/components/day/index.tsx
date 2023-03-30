@@ -1,7 +1,7 @@
 import {useRef} from 'react';
 import Block from './day.styled';
 import moment from 'moment';
-import {getStringWithCapitalLetter} from '../../common/utils';
+import {getStringWithCapitalLetter, adaptMomentToTask} from '../../common/utils';
 import {ITask} from '../../common/interfaces';
 import React from 'react';
 
@@ -18,7 +18,7 @@ const Day: React.FunctionComponent<Props> = props => {
   const dayRef = useRef<HTMLInputElement>(null);
 
   return (
-    <Block ref={dayRef} tabindex='0' $isTask={task !== null} onClick={()=>{onPopupOpening(dayRef, task)}}>
+    <Block ref={dayRef} tabindex='0' $isTask={task !== null} onClick={()=>{onPopupOpening(dayRef, moment(date).format('YYYY-MM-DD'), task)}}>
       <Block.DateSpan>
         {dayNumber < 7
           ? getStringWithCapitalLetter(moment(date).format('dddd')) + ', ' + moment(date).format('D')
